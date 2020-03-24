@@ -1,8 +1,10 @@
 const Sequelize = require('sequelize');
+const config = require('config');
 
-process.env.DB_NAME;
-process.env.DB_USER;
-process.env.DB_PASS;
+const DB_NAME = config.get("DB_NAME");
+const DB_USER = config.get("DB_USER");
+const DB_PASS = config.get("DB_PASS");
+
 
 const db = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
     host: 'localhost',

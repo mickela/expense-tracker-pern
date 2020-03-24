@@ -5,6 +5,8 @@
 
 
 # misc
+default.json
+config.env
 .env
 .DS_Store
 .env.local
