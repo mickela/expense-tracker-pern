@@ -21,14 +21,14 @@ export const GlobalProvider = ({ children }) =>{
         fetch('/api/v1/transactions')
         .then(data => data.json())
         .then(res =>{
-            console.log(res)
+            // console.log(res)
             dispatch({
                 type: 'GET_TRANSACTIONS',
                 payload: res.data
             });
         })
         .catch(err =>{
-            console.log(err)
+            // console.log(err)
             dispatch({
                 type: 'TRANSACTION_ERROR',
                 payload: err
@@ -44,14 +44,14 @@ export const GlobalProvider = ({ children }) =>{
         })
         .then(data => data.json())
         .then(res =>{
-            console.log(res)
+            // console.log(res)
             dispatch({
                 type: 'DELETE_TRANSACTION',
                 payload: id
             });
         })
         .catch(err =>{
-            console.log(err)
+            // console.log(err)
             dispatch({
                 type: 'TRANSACTION_ERROR',
                 payload: "Failed to delete transaction"
@@ -60,7 +60,7 @@ export const GlobalProvider = ({ children }) =>{
     }
     
     function addTransaction(transaction){
-        console.log('transaction', transaction);
+        // console.log('transaction', transaction);
         fetch('api/v1/transactions/', {
             method: 'POST',
             headers: new Headers({
@@ -70,14 +70,14 @@ export const GlobalProvider = ({ children }) =>{
         })
         .then(data => data.json())
         .then(res =>{
-            console.log(res);
+            // console.log(res);
             dispatch({
                 type: 'ADD_TRANSACTION',
                 payload: res.data
             })
         })
         .catch(err =>{
-            console.log(err)
+            // console.log(err)
             dispatch({
                 type: 'TRANSACTION_ERROR',
                 payload: "Failed to add transaction"

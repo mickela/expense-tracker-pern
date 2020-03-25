@@ -15,9 +15,9 @@ function parse(trans){
 exports.getTransactions = (req, res, next) => {
     Transaction.findAll()
     .then(transactions =>{
-        console.log(transactions);
+        // console.log(transactions);
         transactions = parse(transactions);
-        console.log(transactions);
+        // console.log(transactions);
         
         res.status(200).json({
             success: true,
@@ -26,7 +26,7 @@ exports.getTransactions = (req, res, next) => {
         })
     })
     .catch(err =>{
-        console.log(err);
+        // console.log(err);
 
         res.status(500).json({
             success: false,
@@ -42,12 +42,11 @@ exports.getTransactions = (req, res, next) => {
 exports.addTransaction = (req, res, next) => {
     // const { text, amount } = req.body;
 
-    console.log(req.body);
-    console.log(req.params);
+    // console.log(req.body);
     if(req.body.text !== undefined && req.body.amount !== undefined){
         Transaction.create(req.body)
         .then(status =>{
-            console.log(status);
+            // console.log(status);
             
             res.status(201).json({
                 success: true,
@@ -55,7 +54,7 @@ exports.addTransaction = (req, res, next) => {
             })
         })
         .catch(err =>{
-            console.log(err);
+            // console.log(err);
             res.status(500).json({
                 success: false,
                 error: 'Server Error'
@@ -78,18 +77,18 @@ exports.deleteTransaction = (req, res, next) => {
     Transaction.findAll({ where: { id: req.params.id } })
     .then(status =>{
         status = parse(status);
-        console.log(status)
+        // console.log(status)
         if(status.length > 0){
             Transaction.destroy({ where: { id: status[0].id } })
             .then(msg =>{
-                console.log(msg)
+                // console.log(msg)
                 res.status(200).json({
                     success: true,
                     data: 'Deleted Successfully'
                 })
             })
             .catch(err =>{
-                console.log(err);
+                // console.log(err);
                 res.status(500).json({
                     success: false,
                     error: 'Server Error'
@@ -103,7 +102,7 @@ exports.deleteTransaction = (req, res, next) => {
         }
     })
     .catch(err =>{
-        console.log(err);
+        // console.log(err);
         res.status(500).json({
             success: false,
             error: 'Server Error'
