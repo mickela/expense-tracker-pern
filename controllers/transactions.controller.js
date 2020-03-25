@@ -61,7 +61,7 @@ exports.addTransaction = (req, res, next) => {
             });
         })
     }else{
-        res.json({
+        res.status(400).json({
             success: false,
             data: "Please send both text and amount!"
         })
@@ -74,5 +74,38 @@ exports.addTransaction = (req, res, next) => {
 // @access public
 
 exports.deleteTransaction = (req, res, next) => {
-    res.json('DELETE transaction');
+    Transaction.findAll({ where: { id: req.params.id } })
+    .then(status =>{
+        status = parse(status);
+        console.log(status)
+        if(status.length > 0){
+            Transaction.destroy({ where: { id: status[0].id } })
+            .then(msg =>{
+                console.log(msg)
+                res.status(200).json({
+                    success: true,
+                    data: 'Deleted Successfully'
+                })
+            })
+            .catch(err =>{
+                console.log(err);
+                res.status(500).json({
+                    success: false,
+                    error: 'Server Error'
+                });
+            })
+        }else{
+            res.status(404).json({
+                success: false,
+                error: 'Transaction not found!'
+            })
+        }
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({
+            success: false,
+            error: 'Server Error'
+        });
+    })
 }
