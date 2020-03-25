@@ -43,6 +43,7 @@ exports.addTransaction = (req, res, next) => {
     // const { text, amount } = req.body;
 
     console.log(req.body);
+    console.log(req.params);
     if(req.body.text !== undefined && req.body.amount !== undefined){
         Transaction.create(req.body)
         .then(status =>{
